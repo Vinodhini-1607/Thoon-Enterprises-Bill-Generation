@@ -1,0 +1,3 @@
+2026-07-11 14:53:36.668538+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCTS" not found (this database is empty); SQL statement:
+INSERT INTO products (name, description, unit, price, gst_rate, hsn_code, stock_quantity, created_at) VALUES ('Cement - 50kg Bag', 'Ordinary Portland Cement 53 Grade', 'bag', 350.00, 18.00, '25232900', 500, CURRENT_TIMESTAMP), ('Cement - 50kg Bag (PPC)', 'Portland Pozzolana Cement', 'bag', 320.00, 18.00, '25232900', 300, CURRENT_TIMESTAMP) [42104-224]
