@@ -72,7 +72,7 @@ BILL_GENERATION/
 - Maven 3.6 or higher
 
 ### To Start the Application using the JAR
- 1) Navigate to backend/target folder
+ 1) Navigate to /backend/target folder
  2) copy the file bill-generation-backend-1.0.0.jar 
  3) put it in a desired location
  4) open the command prompt 
