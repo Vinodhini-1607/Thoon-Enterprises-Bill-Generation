@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Bills</h2>
+  <button class="btn btn-primary" routerLink="/bills/new">Create New Bill</button>
+</div>
+
+<div class="loading-spinner" *ngIf="loading">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div class="table-responsive" *ngIf="!loading">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Bill Number</th>
+        <th>Customer</th>
+        <th>Date</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bill of bills">
+        <td>{{ bill.billNumber }}</td>
+        <td>{{ bill.customer?.name }}</td>
+        <td>{{ bill.billDate | date:'mediumDate' }}</td>
+        <td>₹{{ bill.totalAmount | number:'1.2-2' }}</td>
+        <td>
+          <span class="badge bg-success">{{ bill.paymentStatus }}</span>
+        </td>
+        <td>
+          <button class="btn btn-sm btn-info me-2" (click)="downloadPdf(bill.id!, bill.billNumber!)">
+            <i class="bi bi-file-earmark-pdf"></i> PDF
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deleteBill(bill.id!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

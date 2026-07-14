@@ -4,6 +4,16 @@ A standalone application for generating bills with GST calculation for construct
 
 ## Technology Stack
 
+### To Start the Application using the JAR
+ 1) Navigate to backend/target folder
+ 2) copy the file bill-generation-bakend-1.0.0.jar 
+ 3) put it in a desried location
+ 4) open the command prompt 
+ 5) Run the below command to start the application
+ 6) java -jar bill-generation-bakend-1.0.0.jar
+ 7) Once the application started . Navigate to http://localhost:8080/ to access the application
+ 8) Database can be accessed via http://localhost:8080/h2-console/
+
 ### Backend
 - **Spring Boot 3.2.0** with Java 17+
 - **H2 Database** (embedded, file-based persistence)

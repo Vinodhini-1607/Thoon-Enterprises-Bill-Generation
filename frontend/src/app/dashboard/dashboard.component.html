@@ -1,0 +1,146 @@
+<div class="page-header fade-in">
+  <div class="container">
+    <h2><i class="bi bi-speedometer2"></i> Dashboard</h2>
+    <p class="mb-0">Welcome to Thoon Enterprises Bill Management System</p>
+  </div>
+</div>
+
+<div class="container">
+  <div class="loading-spinner" *ngIf="loading">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="!loading">
+    <div class="col-md-3">
+      <div class="dashboard-card fade-in" style="animation-delay: 0.1s;">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-primary">
+            <i class="bi bi-receipt"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="card-title mb-0">Total Bills</h5>
+            <small class="text-muted">All time</small>
+          </div>
+        </div>
+        <h3>{{ totalBills }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="dashboard-card fade-in" style="animation-delay: 0.2s;">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-success">
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="card-title mb-0">Total Customers</h5>
+            <small class="text-muted">Registered</small>
+          </div>
+        </div>
+        <h3>{{ totalCustomers }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="dashboard-card fade-in" style="animation-delay: 0.3s;">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-info">
+            <i class="bi bi-box-seam"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="card-title mb-0">Total Products</h5>
+            <small class="text-muted">Available</small>
+          </div>
+        </div>
+        <h3>{{ totalProducts }}</h3>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="dashboard-card fade-in" style="animation-delay: 0.4s;">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-warning">
+            <i class="bi bi-currency-rupee"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="card-title mb-0">Total Revenue</h5>
+            <small class="text-muted">All time</small>
+          </div>
+        </div>
+        <h3>₹{{ totalRevenue | number:'1.2-2' }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4 fade-in" style="animation-delay: 0.5s;">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-lightning"></i> Quick Actions</h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <button class="btn btn-primary w-100 py-3" routerLink="/bills/new">
+                <i class="bi bi-plus-circle"></i> Create New Bill
+              </button>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-success w-100 py-3" routerLink="/customers/new">
+                <i class="bi bi-person-plus"></i> Add Customer
+              </button>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-info w-100 py-3" routerLink="/products/new">
+                <i class="bi bi-box"></i> Add Product
+              </button>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-secondary w-100 py-3" routerLink="/reports">
+                <i class="bi bi-bar-chart"></i> View Reports
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4 fade-in" style="animation-delay: 0.6s;">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-info-circle"></i> System Information</h5>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled mb-0">
+            <li class="mb-2">
+              <strong>Company:</strong> Thoon Enterprises
+            </li>
+            <li class="mb-2">
+              <strong>Business Type:</strong> Construction Materials Supplier
+            </li>
+            <li class="mb-2">
+              <strong>System Version:</strong> 1.0.0
+            </li>
+            <li class="mb-0">
+              <strong>Last Updated:</strong> {{ currentDate | date:'medium' }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-clock-history"></i> Recent Activity</h5>
+        </div>
+        <div class="card-body">
+          <p class="text-muted mb-0">No recent activity to display.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

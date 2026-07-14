@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Customers</h2>
+  <button class="btn btn-primary" routerLink="/customers/new">Add Customer</button>
+</div>
+
+<div class="mb-3">
+  <input type="text" class="form-control" placeholder="Search customers..." [(ngModel)]="searchKeyword" (input)="searchCustomers()">
+</div>
+
+<div class="loading-spinner" *ngIf="loading">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div class="table-responsive" *ngIf="!loading">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>GST Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.phone }}</td>
+        <td>{{ customer.address }}</td>
+        <td>{{ customer.gstNumber || '-' }}</td>
+        <td>
+          <button class="btn btn-sm btn-info me-2" routerLink="/customers/edit/{{customer.id}}">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteCustomer(customer.id!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

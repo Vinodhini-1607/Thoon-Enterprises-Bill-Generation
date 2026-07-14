@@ -1,0 +1,39 @@
+<h2 *ngIf="!isEditMode">Add Customer</h2>
+<h2 *ngIf="isEditMode">Edit Customer</h2>
+
+<div class="card">
+  <div class="card-body">
+    <form (ngSubmit)="saveCustomer()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name *</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="customer.name" name="name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone *</label>
+        <input type="text" class="form-control" id="phone" [(ngModel)]="customer.phone" name="phone" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label">Address *</label>
+        <textarea class="form-control" id="address" [(ngModel)]="customer.address" name="address" rows="3" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="customer.email" name="email">
+      </div>
+
+      <div class="mb-3">
+        <label for="gstNumber" class="form-label">GST Number</label>
+        <input type="text" class="form-control" id="gstNumber" [(ngModel)]="customer.gstNumber" name="gstNumber">
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+        {{ loading ? 'Saving...' : 'Save' }}
+      </button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>

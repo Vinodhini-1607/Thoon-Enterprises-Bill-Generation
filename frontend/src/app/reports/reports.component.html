@@ -1,0 +1,413 @@
+<div class="page-header fade-in">
+  <div class="container">
+    <h2><i class="bi bi-bar-chart"></i> Reports & Analytics</h2>
+    <p class="mb-0">Comprehensive business intelligence and statistical analysis</p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Dashboard Statistics -->
+  <div class="row mb-4" *ngIf="dashboardStats">
+    <div class="col-md-3">
+      <div class="dashboard-card fade-in" style="animation-delay: 0.1s;">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-primary">
+            <i class="bi bi-currency-rupee"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="card-title mb-0">Total Revenue</h5>
+            <small class="text-muted">All time</small>
+          </div>
+        </div>
+        <h3>₹{{ dashboardStats.totalRevenue | number:'1.2-2' }}</h3>
+        <small>{{ dashboardStats.totalBills }} bills</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="dashboard-card fade-in" style="animation-delay: 0.2s;">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-success">
+            <i class="bi bi-calendar-check"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="card-title mb-0">Today's Revenue</h5>
+            <small class="text-muted">Today</small>
+          </div>
+        </div>
+        <h3>₹{{ dashboardStats.todayRevenue | number:'1.2-2' }}</h3>
+        <small>{{ dashboardStats.todayBills }} bills today</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="dashboard-card fade-in" style="animation-delay: 0.3s;">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-info">
+            <i class="bi bi-calendar-month"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="card-title mb-0">This Month</h5>
+            <small class="text-muted">Current month</small>
+          </div>
+        </div>
+        <h3>₹{{ dashboardStats.monthRevenue | number:'1.2-2' }}</h3>
+        <small>{{ dashboardStats.monthBills }} bills this month</small>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="dashboard-card fade-in" style="animation-delay: 0.4s;">
+        <div class="d-flex align-items-center mb-3">
+          <div class="icon-box bg-warning">
+            <i class="bi bi-graph-up"></i>
+          </div>
+          <div class="ms-3">
+            <h5 class="card-title mb-0">Avg Bill Value</h5>
+            <small class="text-muted">Per bill</small>
+          </div>
+        </div>
+        <h3>₹{{ dashboardStats.averageBillValue | number:'1.2-2' }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Customers and Products -->
+  <div class="row mb-4" *ngIf="dashboardStats">
+    <div class="col-md-6">
+      <div class="card fade-in" style="animation-delay: 0.5s;">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-trophy"></i> Top 5 Customers by Revenue</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Customer ID</th>
+                <th>Total Revenue</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customer of dashboardStats.topCustomers">
+                <td>{{ customer.customerId }}</td>
+                <td>₹{{ customer.totalRevenue | number:'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card fade-in" style="animation-delay: 0.6s;">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-box-seam"></i> Top 5 Products by Revenue</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Revenue</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of dashboardStats.topProducts">
+                <td>{{ product.productName }}</td>
+                <td>₹{{ product.revenue | number:'1.2-2' }}</td>
+                <td>{{ product.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GST Summary -->
+  <div class="row mb-4" *ngIf="dashboardStats">
+    <div class="col-md-12">
+      <div class="card fade-in" style="animation-delay: 0.7s;">
+        <div class="card-header">
+          <h5 class="mb-0"><i class="bi bi-receipt"></i> GST Summary</h5>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="stat-box">
+                <strong>Total CGST:</strong> ₹{{ dashboardStats.totalCGST | number:'1.2-2' }}
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-box">
+                <strong>Total SGST:</strong> ₹{{ dashboardStats.totalSGST | number:'1.2-2' }}
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-box">
+                <strong>Total IGST:</strong> ₹{{ dashboardStats.totalIGST | number:'1.2-2' }}
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="stat-box">
+                <strong>Total GST Collected:</strong> ₹{{ dashboardStats.totalGSTCollected | number:'1.2-2' }}
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <strong>Inter-State Bills:</strong> {{ dashboardStats.interStateBills }}
+            </div>
+            <div class="col-md-6">
+              <strong>Intra-State Bills:</strong> {{ dashboardStats.intraStateBills }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Report Generation -->
+  <div class="card fade-in" style="animation-delay: 0.8s;">
+    <div class="card-header">
+      <h5 class="mb-0"><i class="bi bi-file-earmark-bar-graph"></i> Generate Detailed Reports</h5>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <label for="reportType" class="form-label">Select Report Type</label>
+        <select class="form-select" id="reportType" [(ngModel)]="selectedReport" name="reportType">
+          <option value="">-- Select Report --</option>
+          <option value="monthly">Monthly Sales Report</option>
+          <option value="customer">Customer-wise Report</option>
+          <option value="product">Product-wise Report</option>
+          <option value="gst">GST Report</option>
+        </select>
+      </div>
+
+      <div class="mb-3" *ngIf="selectedReport === 'monthly'">
+        <label for="year" class="form-label">Year</label>
+        <input type="number" class="form-control" id="year" [(ngModel)]="year" name="year">
+      </div>
+
+      <div class="mb-3" *ngIf="selectedReport === 'monthly'">
+        <label for="month" class="form-label">Month</label>
+        <input type="number" class="form-control" id="month" [(ngModel)]="month" name="month" min="1" max="12">
+      </div>
+
+      <div class="mb-3" *ngIf="selectedReport === 'customer'">
+        <label for="customerId" class="form-label">Customer ID</label>
+        <input type="number" class="form-control" id="customerId" [(ngModel)]="customerId" name="customerId">
+      </div>
+
+      <div class="mb-3" *ngIf="selectedReport !== 'monthly'">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input type="date" class="form-control" id="startDate" [(ngModel)]="startDate" name="startDate">
+      </div>
+
+      <div class="mb-3" *ngIf="selectedReport !== 'monthly'">
+        <label for="endDate" class="form-label">End Date</label>
+        <input type="date" class="form-control" id="endDate" [(ngModel)]="endDate" name="endDate">
+      </div>
+
+      <button class="btn btn-primary" (click)="generateReport()" [disabled]="loading">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+        {{ loading ? 'Generating...' : 'Generate Report' }}
+      </button>
+      <button class="btn btn-success ms-2" (click)="downloadReportPdf()" [disabled]="!reportData">
+        <i class="bi bi-file-earmark-pdf"></i> Download PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Report Results -->
+  <div class="mt-4 fade-in" style="animation-delay: 0.9s;" *ngIf="reportData">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0"><i class="bi bi-file-text"></i> Report Results - {{ selectedReport | titlecase }}</h5>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-info">
+          <strong>Period:</strong> {{ reportData.period }}
+        </div>
+
+        <!-- Monthly Report Statistics -->
+        <div *ngIf="selectedReport === 'monthly'" class="row mb-3">
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Total Bills</h6>
+              <h3>{{ reportData.totalBills }}</h3>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Average Bill Value</h6>
+              <h3>₹{{ reportData.averageBillValue | number:'1.2-2' }}</h3>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Growth Rate</h6>
+              <h3 *ngIf="reportData.monthOverMonthGrowth">
+                {{ reportData.monthOverMonthGrowth | number:'1.2-2' }}%
+              </h3>
+              <h3 *ngIf="!reportData.monthOverMonthGrowth">N/A</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly Sales Chart -->
+        <div *ngIf="selectedReport === 'monthly'" class="row mb-3">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="mb-0">Monthly Sales Trend</h6>
+              </div>
+              <div class="card-body">
+                <canvas id="monthlySalesChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Report Statistics -->
+        <div *ngIf="selectedReport === 'customer'" class="row mb-3">
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Total Bills</h6>
+              <h3>{{ reportData.totalBills }}</h3>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Average Purchase</h6>
+              <h3>₹{{ reportData.averagePurchase | number:'1.2-2' }}</h3>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="dashboard-card">
+              <h6>Purchase Frequency</h6>
+              <h3>{{ reportData.purchaseFrequency }}</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Purchase Chart -->
+        <div *ngIf="selectedReport === 'customer'" class="row mb-3">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="mb-0">Purchase History</h6>
+              </div>
+              <div class="card-body">
+                <canvas id="customerPurchaseChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Report Statistics -->
+        <div *ngIf="selectedReport === 'product'" class="row mb-3">
+          <div class="col-md-6">
+            <div class="dashboard-card">
+              <h6>Total Products</h6>
+              <h3>{{ reportData.totalProducts }}</h3>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="dashboard-card">
+              <h6>Grand Total Revenue</h6>
+              <h3>₹{{ reportData.grandTotalRevenue | number:'1.2-2' }}</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Revenue Chart -->
+        <div *ngIf="selectedReport === 'product'" class="row mb-3">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="mb-0">Product Revenue Distribution</h6>
+              </div>
+              <div class="card-body">
+                <canvas id="productRevenueChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Data Table -->
+        <div *ngIf="selectedReport === 'product' && reportData.products" class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Total Quantity</th>
+                <th>Total Revenue</th>
+                <th>Total GST</th>
+                <th>Bill Count</th>
+                <th>Revenue Share</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of reportData.products">
+                <td>{{ product.productName }}</td>
+                <td>{{ product.totalQuantity }}</td>
+                <td>₹{{ product.totalRevenue | number:'1.2-2' }}</td>
+                <td>₹{{ product.totalGST | number:'1.2-2' }}</td>
+                <td>{{ product.billCount }}</td>
+                <td>{{ product.revenueShare | number:'1.2-2' }}%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- GST Rate Breakdown -->
+        <div *ngIf="selectedReport === 'gst'" class="row mb-3">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="mb-0">GST Distribution (Pie Chart)</h6>
+              </div>
+              <div class="card-body">
+                <canvas id="gstPieChart"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h6 class="mb-0">Taxable Amount by GST Rate</h6>
+              </div>
+              <div class="card-body">
+                <canvas id="gstBarChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedReport === 'gst' && reportData.gstRateBreakdown" class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>GST Rate</th>
+                <th>Taxable Amount</th>
+                <th>CGST</th>
+                <th>SGST</th>
+                <th>IGST</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let gst of reportData.gstRateBreakdown">
+                <td>{{ gst.gstRate }}%</td>
+                <td>₹{{ gst.taxableAmount | number:'1.2-2' }}</td>
+                <td>₹{{ gst.cgstAmount | number:'1.2-2' }}</td>
+                <td>₹{{ gst.sgstAmount | number:'1.2-2' }}</td>
+                <td>₹{{ gst.igstAmount | number:'1.2-2' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
