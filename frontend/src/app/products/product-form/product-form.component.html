@@ -1,0 +1,49 @@
+<h2 *ngIf="!isEditMode">Add Product</h2>
+<h2 *ngIf="isEditMode">Edit Product</h2>
+
+<div class="card">
+  <div class="card-body">
+    <form (ngSubmit)="saveProduct()">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name *</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="product.name" name="name" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" [(ngModel)]="product.description" name="description" rows="3"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="unit" class="form-label">Unit *</label>
+        <input type="text" class="form-control" id="unit" [(ngModel)]="product.unit" name="unit" required placeholder="e.g., pcs, kg, m">
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price *</label>
+        <input type="number" class="form-control" id="price" [(ngModel)]="product.price" name="price" required min="0" step="0.01">
+      </div>
+
+      <div class="mb-3">
+        <label for="gstRate" class="form-label">GST Rate (%) *</label>
+        <input type="number" class="form-control" id="gstRate" [(ngModel)]="product.gstRate" name="gstRate" required min="0" max="100" step="0.01">
+      </div>
+
+      <div class="mb-3">
+        <label for="hsnCode" class="form-label">HSN Code</label>
+        <input type="text" class="form-control" id="hsnCode" [(ngModel)]="product.hsnCode" name="hsnCode">
+      </div>
+
+      <div class="mb-3">
+        <label for="stockQuantity" class="form-label">Stock Quantity</label>
+        <input type="number" class="form-control" id="stockQuantity" [(ngModel)]="product.stockQuantity" name="stockQuantity" min="0">
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="loading">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+        {{ loading ? 'Saving...' : 'Save' }}
+      </button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="cancel()">Cancel</button>
+    </form>
+  </div>
+</div>
